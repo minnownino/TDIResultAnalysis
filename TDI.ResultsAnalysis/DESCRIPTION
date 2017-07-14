@@ -1,0 +1,16 @@
+Package: TDI.ResultsAnalysis
+Type: Package
+Title:
+Version: 0.1
+Date: 2016-10-03
+Author: Chunhui Cai
+Maintainer: Chunhui Cai <chunhuic@pitt.edu>
+Description:
+Depends:
+  R (>= 3.1.0),
+  CommonRFuns (>= 0.1),
+  foreach (>= 1.0),
+  doParallel (>= 1.0)
+License: GPL-2
+LazyData: TRUE
+RoxygenNote: 5.0.1
