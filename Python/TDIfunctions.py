@@ -70,3 +70,37 @@ def getsigSGADEG(driverTriplet, sigDrivers):
             if float(count) / numOfTumors >= 0.2:
                 result.append((sga, deg, float(count)/numOfTumors))
     return result
+
+def generateSGAcsv(FILE_PATH):
+    """
+        transform sga-tumor 0/1 matrix into pairs for further use
+    """
+    #df = pd.read_csv('PanCancer13tts.SGAmatrix.4TCI.csv')
+    df = pd.read_csv(FILE_PATH)
+    bt = df.apply(lambda x: x > 0)
+    cols = df.columns
+    bt.apply(lambda x: list(cols[x.values]), axis=1)
+    df = df.set_index('Unnamed: 0')
+    result = bt.apply(lambda x: list(cols[x.values]), axis=1)
+    f = open('SGApair.csv', 'w')
+    f.write('SGA_name,tumor_name\n')
+    for item in result.iteritems():
+        (tumor, sgas) = item
+        for sga in sgas:
+            f.write(sga + ',' + tumor + '\n')
+
+def getCancertypeTotalCount(TSDTRIPLET_FILE_PATH):
+    """
+     get total number of tumors in each cancer type for one version of TDI results
+     return groups count of each cancer type
+    """
+    #read the mapping of tumor-cancer type, generated a lookup dictionary
+    df_cttumormap = pd.read_csv('TumorID.vs.CancerType.v20160321.csv')
+    typedictionary = dict(zip(df_cttumormap.TumorID, df_cttumormap.CancerType))
+    
+    df = pd.read_csv('TSDtriplet.csv')
+    df['tumortype'] = df.patient_name.map(typedictionary)
+    df_new = df[['patient_name', 'tumortype']]
+    df_new = df_new.drop_duplicates()
+    groups = df_new.groupby('tumortype').size()
+    return df, groups.to_dict()
