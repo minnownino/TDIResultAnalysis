@@ -103,4 +103,4 @@ def getCancertypeTotalCount(TSDTRIPLET_FILE_PATH):
     df_new = df[['patient_name', 'tumortype']]
     df_new = df_new.drop_duplicates()
     groups = df_new.groupby('tumortype').size()
-    return df, groups.to_dict()
+    return df, groups
