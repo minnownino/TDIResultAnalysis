@@ -1,4 +1,3 @@
-
 import pandas as pd
 import numpy as np
 import csv
@@ -14,12 +13,16 @@ while os.path.exists('driverCallPerTumor%s-%s.csv'%(date, i)):
     i += 1
 print date, str(i), "finished"
     
+
 ###### set path
 print "set path"
-TDI_FILE_PATH = "data_noCT/TSDtriplet.csv"
+TDI_FILE_PATH = "TSDtriplet.csv"
 # POS_FILE_PATH = "data_noCT/PANCAN.postprobcutoff.perSGA.csv"
-POS_FILE_PATH = "data_noCT/PANCAN.postprobthd.p=0.001.perSGA.csv"
-SGA_FILE_PATH = "data_noCT/SGAs.csv"
+POS_FILE_PATH = "postprobthd.p=0.05.perSGA.csv"
+SGA_FILE_PATH = "SGApair.csv"
+print TDI_FILE_PATH
+print POS_FILE_PATH
+print SGA_FILE_PATH
 
 ###### read file to get the dataframe above threshold 
 df = read_file(TDI_FILE_PATH, POS_FILE_PATH)
@@ -28,7 +31,7 @@ df = read_file(TDI_FILE_PATH, POS_FILE_PATH)
 ###### find driver per tumor and get the driver gene triplet
 (driverTriplet, driverPerTumor) = driver(df)
 driverPerTumor.to_csv('driverCallPerTumor%s-%s.csv'%(date, i))
-driverTriplet.to_csv('')
+driverTriplet.to_csv('tripletFilter%s-%s.csv'%(date, i))
 print 'driverCallPerTumor%s-%s.csv'%(date, i)+" saved"
 
 
@@ -36,6 +39,7 @@ print 'driverCallPerTumor%s-%s.csv'%(date, i)+" saved"
 result = sigDriverCallRate(driverPerTumor, SGA_FILE_PATH)
 with open('driverCallRate%s-%s.csv'%(date, i), 'wb') as csvfile:
     wr = csv.writer(csvfile)
+    #wr.writerow(['SGA_name', '#Driverevents', '#SGAevents', 'Drivercallrate'])
     for row in result:
         wr.writerow([row[0], row[1], row[2], round(float(row[3]),2)])
 print 'driverCallRate%s-%s.csv'%(date, i)+" saved"
@@ -65,4 +69,26 @@ del sigSGADEGTUMOR['Unnamed: 0']
 del sigSGADEGTUMOR['ratio']
 sigSGADEGTUMOR.to_csv('sigSGADEGTUMOR%s-%s.csv'%(date, i))
 print 'sigSGADEGTUMOR%s-%s.csv'%(date, i)+' saved'
+
+###### get top 20 SGAs for this version of TDI result
+df = driverPerTumor
+df_tumor = df[['patient_name', 'cause_gene_name']]
+df_tumor = df_tumor.drop_duplicates()
+grouped = df_tumor.groupby(df_tumor.cause_gene_name).size()
+sgatop20 = [x for x in grouped.nlargest(20).index]
+with open('top20SGA%s-%s.csv'%(date, i), 'w') as f:
+    for sga in sgatop20:
+        f.write(sga+'\n')
+print grouped.nlargest(20)
+print 'top20SGA%s-%s.csv'%(date, i)+' saved'
+
+###########################################33
+# calculate the count of each tumor type
+df, groups = getCancertypeTotalCount(TDI_FILE_PATH)
+with open('totalcountofeachtype%s-%s.csv'%(date, i), 'wb') as csv_file:
+    writer = csv.writer(csv_file)
+    for key, value in groups.items():
+        writer.writerow([key, value])
+print 'totalcountofeachtype%s-%s.csv'%(date, i)+' saved'
+
 print "finish"
