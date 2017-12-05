@@ -91,4 +91,23 @@ with open('totalcountofeachtype%s-%s.csv'%(date, i), 'wb') as csv_file:
         writer.writerow([key, value])
 print 'totalcountofeachtype%s-%s.csv'%(date, i)+' saved'
 
+
+top20sga = pd.read_csv('top20SGA2017-11-28-0.csv', header = None)
+top20sga.columns = ['sganame']
+sgas = top20sga['sganame'].tolist()
+
+count = pd.read_csv('totalcountofeachtype2017-11-28-0.csv', header = None)
+count.columns = ['cancertype', 'count']
+count = count.set_index('cancertype')
+typecountmap = count.to_dict()
+typecountmap = typecountmap['count']
+result = {}
+for sga in sgas:
+    result[sga] = getSGAcancertypedistribution(sga)
+
+print 'printing the top 20 data into the pickle file indexdata%s-%s.plk'%(date, i)
+output = open('indexdata%s-%s.plk'%(date, i), 'wb')
+# Pickle dictionary using protocol 0.
+pickle.dump(result, output)
+output.close()
 print "finish"
