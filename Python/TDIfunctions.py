@@ -104,3 +104,52 @@ def getCancertypeTotalCount(TSDTRIPLET_FILE_PATH):
     df_new = df_new.drop_duplicates()
     groups = df_new.groupby('tumortype').size()
     return df, groups
+def getSGAcancertypedistribution(sga):
+    mydb = MySQLdb.connect("localhost", "root", "root", "TDI_PanCancerAtlas")
+    cursor = mydb.cursor()
+    query = "select Patient_Barcode from Somatic_Mutations_IMPACT1 where Hugo_Symbol = '%s'"%(sga)
+    cursor.execute(query)
+    result_SM = cursor.fetchall()
+    query = "select Tumor_Barcode from SCNAs_IMPACT1 as S where S.GISTIC2_score = 2 and Hugo_Symbol = '%s'"%(sga)
+    cursor.execute(query)
+    result_CN_AMP = cursor.fetchall()
+    query = "select Tumor_Barcode from SCNAs_IMPACT1 as S where S.GISTIC2_score = -2 and Hugo_Symbol = '%s'"%(sga)
+    cursor.execute(query)
+    result_CN_DEL = cursor.fetchall()
+
+    set_SM = set()
+    set_CN_AMP = set()
+    set_CN_DEL = set()
+    for item in result_SM:
+        set_SM.add(item[0])
+
+    for item in result_CN_AMP:
+        set_CN_AMP.add(item[0])
+
+    for item in result_CN_DEL:
+        set_CN_DEL.add(item[0])
+    #return (set_SM, set_CN_AMP, set_CN_DEL)
+    #print set_CN_DEL
+
+    df_cttumormap = pd.read_csv('TumorID.vs.CancerType.v20160321.csv')
+    typedictionary = dict(zip(df_cttumormap.TumorID, df_cttumormap.CancerType))
+
+    df_SM = pd.DataFrame({'tumor' : list(set_SM)})
+    df_CN_AMP = pd.DataFrame({'tumor' : list(set_CN_AMP)})
+    df_CN_DEL = pd.DataFrame({'tumor' : list(set_CN_DEL)})
+
+    df_SM['type'] = df_SM.tumor.map(typedictionary)
+    df_CN_AMP['type'] = df_CN_AMP.tumor.map(typedictionary)
+    df_CN_DEL['type'] = df_CN_DEL.tumor.map(typedictionary)
+
+    group_SM = df_SM.groupby('type').size()
+    group_CN_AMP = df_CN_AMP.groupby('type').size()
+    group_CN_DEL = df_CN_DEL.groupby('type').size()
+
+    # generate JSON object
+    obj = {}
+    obj['SM'] = group_SM.to_dict()
+    obj['CN_AMP'] = group_CN_AMP.to_dict()
+    obj['CN_DEL'] = group_CN_DEL.to_dict()
+    
+    return obj
