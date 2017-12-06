@@ -130,7 +130,15 @@ def getSGAcancertypedistribution(sga):
         set_CN_DEL.add(item[0])
     #return (set_SM, set_CN_AMP, set_CN_DEL)
     #print set_CN_DEL
-
+    # get intersection with TDI results
+    df = pd.read_csv('TSDtriplet.csv')
+    df_sub = df[df.cause_gene_name == sga]
+    set_tdi = set(df_sub.patient_name)
+    
+    set_SM = set_tdi & set_SM
+    set_CN_AMP = set_tdi & set_CN_AMP
+    set_CN_DEL = set_tdi & set_CN_DEL
+    
     df_cttumormap = pd.read_csv('TumorID.vs.CancerType.v20160321.csv')
     typedictionary = dict(zip(df_cttumormap.TumorID, df_cttumormap.CancerType))
 
