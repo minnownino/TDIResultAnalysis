@@ -110,9 +110,11 @@ for item in result:
         for ct in result[item][i]:
             result[item][i][ct] = result[item][i][ct] / float(typecountmap[ct])
 
+returndata = {"list": sgas, "data": result}
+
 print 'printing the top 20 data into the pickle file indexdata%s-%s.plk'%(date, i)
 output = open('indexdata%s-%s.plk'%(date, i), 'wb')
-# Pickle dictionary using protocol 0.
-pickle.dump(result, output)
+#Pickle dictionary using protocol 0.
+pickle.dump(returndata, output)
 output.close()
 print "finish"
