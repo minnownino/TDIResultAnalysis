@@ -105,6 +105,11 @@ result = {}
 for sga in sgas:
     result[sga] = getSGAcancertypedistribution(sga)
 
+for item in result:
+    for i in result[item]:
+        for ct in result[item][i]:
+            result[item][i][ct] = result[item][i][ct] / float(typecountmap[ct])
+
 print 'printing the top 20 data into the pickle file indexdata%s-%s.plk'%(date, i)
 output = open('indexdata%s-%s.plk'%(date, i), 'wb')
 # Pickle dictionary using protocol 0.
