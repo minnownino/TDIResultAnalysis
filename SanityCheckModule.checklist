@@ -1,3 +1,9 @@
-1. Compare highest posterior probability per DEG distribution between real data experiment and random DEG matrix permutation experiments.
+1. Compare highest posterior probability per DEG distribution between real data experiment and 3 random DEG matrix permutation experiments.
+
+Extract Tumor-SGA-DEG-PostProb triplet.
+Fit the parameters according to the powerlaw distribution. Compare the parameters between the real data and random permutated data.
+
+2. 
+
 
 
