@@ -1,0 +1,142 @@
+Parameters used for sanity check: 
+Driver call frequency cutoff: 300 
+Driver call rate cutoff: 0.8 
+
+
+1.1. Top SGA changes:
+Number of TDI triplet records in the new version: 11769129 
+Number of TDI triplet records in the standard version: 11769129 
+Number of overlaped Tumor-DEG pairs: 11769129 
+Number of TDI triplet records overlaps between both versions: 3255081 
+Percentage of top SGA changes for DEGs from standard version to new version: 0.7234221 
+
+
+1.2. Top driver changes for their target DEGs:
+Number of TDI triplet records for significant drivers and their target DEGs in the new version: 2695698 
+Number of TDI triplet records for significant drivers and their target DEGs in the standard version: 3413152 
+Number of overlaped Tumor-DEG pairs: 1671957 
+Number of TDI triplet records overlaps between both versions: 1054019 
+Percentage of changes for significant drivers and their target DEGs from standard version to new version: 0.3695896 
+
+
+2.1. Top drivers(driver call frequencty>=300; driver call rate>=0.8): 
+Number of top drivers in the new version: 41 
+Number of top drivers in the standard version: 52 
+Number of top dirvers overlap between the new version and the standard version: 41 
+DMRTA1;MCF2L2;ABCF3;SGA.unit.344;SGA.unit.376;SGA.unit.436;LINC00969;SI;SGA.unit.473;CTTN;SPTA1 are not identified as the top drivers in the new version! 
+
+2.2. Target DEGs of the Overlaped Top drivers: 
+Driver name	# target DEGs in new version	# target DEGs in standard version	# overlaps
+EGFR 	 317 	 364 	 176 
+TP53 	 306 	 855 	 177 
+PIK3CA 	 425 	 346 	 101 
+RB1 	 104 	 164 	 68 
+PCDHGC5 	 386 	 716 	 237 
+CDKN2A 	 459 	 903 	 252 
+CDKN2B 	 124 	 169 	 44 
+MTAP 	 42 	 60 	 11 
+C9orf53 	 60 	 106 	 21 
+RYR2 	 125 	 152 	 65 
+PTEN 	 278 	 345 	 154 
+TTN 	 50 	 192 	 13 
+MUC16 	 39 	 82 	 6 
+CSMD3 	 81 	 73 	 26 
+ZNF536 	 42 	 43 	 9 
+ZFHX4 	 164 	 187 	 70 
+MUC4 	 20 	 26 	 4 
+CSMD1 	 14 	 16 	 4 
+ARID1A 	 215 	 207 	 117 
+KRAS 	 337 	 377 	 168 
+PDE4DIP 	 27 	 18 	 6 
+LRP1B 	 120 	 166 	 39 
+FAT1 	 209 	 109 	 56 
+DNAH5 	 16 	 12 	 6 
+APC 	 1226 	 2175 	 984 
+USH2A 	 22 	 52 	 9 
+SGA.unit.477 	 102 	 124 	 25 
+MYEOV 	 36 	 21 	 3 
+MIR548K 	 48 	 72 	 15 
+PPFIA1 	 25 	 32 	 10 
+SHANK2 	 28 	 42 	 9 
+FADD 	 35 	 66 	 15 
+ANO1 	 19 	 24 	 1 
+SNHG14 	 275 	 395 	 131 
+PCDHAC2 	 326 	 152 	 86 
+HRNR 	 70 	 82 	 28 
+MLL2 	 42 	 28 	 9 
+BAGE2 	 139 	 202 	 64 
+XIRP2 	 50 	 73 	 15 
+SYNE1 	 15 	 19 	 5 
+FRG1B 	 137 	 126 	 32 
+
+
+3. Driver KEAP1 and NFE2L2: 
+Driver call frequency and driver call rate for KEAP1: 174 1 
+Driver call frequency and driver call rate for NFE2L2: 173 1 
+Number of tumors driven by both KEAP1 and NFE2L2: 8 
+Number of target DEGs regulated by KEAP1: 182 
+Number of target DEGs regulated by NFE2L2: 57 
+Number of target DEGs regulated by KEAP1 both NFE2L2: 13 
+
+
+4. TDI predicted PIK3CA target DEGs and Hart predicted PIK3CA DEGs: 
+Driver call frequency and driver call rate for PIK3CA: 978 1 
+Number of TDI predicted target DEGs regulated by PIK3CA: 425 
+Number of PIK3CA affected DEGs in Hart list: 1434 
+Number of DEG overlaps between TDI predictions and Hart list: 81 
+
+
+5. CSMD3 and ZFHX4 target DEGs: 
+Driver call frequency and driver call rate for CSMD3: 846 1 
+Driver call frequency and driver call rate for ZFHX4: 527 1 
+Experimental tested target DEGs found in CSMD3: GJB2; MAD2L1; MMP11 
+Experimental tested target DEGs not found in CSMD3: CDKN3; WNT11 
+Experimental tested target DEGs found in ZFHX4: NPR1; GSTM5; FHL1 
+Experimental tested target DEGs not found in ZFHX4: DES; CDCA3 
+
+
+6.1. p53 pathway involved drivers and their target DEGs:
+p53 pathway genes that are not identified as significant drivers: MDM4;PPM1D;CCND1 
+
+Driver call frequency and driver call rate for TP53: 1908 1 
+Driver call frequency and driver call rate for CDK4: 85 0.833333333333333 
+Driver call frequency and driver call rate for CDKN2A: 785 1 
+Driver call frequency and driver call rate for PTEN: 573 1 
+Driver call frequency and driver call rate for CCNE1: 190 0.974358974358974 
+Driver call frequency and driver call rate for CASP8: 95 1 
+
+Number of TDI predicted target DEGs regulated by TP53 : 306 
+Number of TDI predicted target DEGs regulated by CDK4 : 17 
+Number of TDI predicted target DEGs regulated by CDKN2A : 459 
+Number of TDI predicted target DEGs regulated by PTEN : 278 
+Number of TDI predicted target DEGs regulated by CCNE1 : 63 
+Number of TDI predicted target DEGs regulated by CASP8 : 296 
+
+Number of target DEGs overlaps between drivers in p53 pathway:
+	 TP53	CDK4	CDKN2A	PTEN	CCNE1	CASP8 
+TP53 	 NA	0	13	4	2	4 
+CDK4 	 NA	NA	1	0	0	1 
+CDKN2A 	 NA	NA	NA	18	8	25 
+PTEN 	 NA	NA	NA	NA	19	4 
+CCNE1 	 NA	NA	NA	NA	NA	1 
+CASP8 	 NA	NA	NA	NA	NA	NA 
+
+
+6.2. Notch pathway involved drivers and their target DEGs:
+Notch pathway genes that are not identified as significant drivers: NCOR2 
+
+Driver call frequency and driver call rate for CREBBP: 84 0.51219512195122 
+Driver call frequency and driver call rate for EP300: 135 0.849056603773585 
+Driver call frequency and driver call rate for NOTCH1: 173 1 
+
+Number of TDI predicted target DEGs regulated by CREBBP : 13 
+Number of TDI predicted target DEGs regulated by EP300 : 21 
+Number of TDI predicted target DEGs regulated by NOTCH1 : 348 
+
+Number of target DEGs overlaps between drivers in Notch pathway:
+	 CREBBP	EP300	NOTCH1 
+CREBBP 	 NA	0	3 
+EP300 	 NA	NA	4 
+NOTCH1 	 NA	NA	NA 
+
+
