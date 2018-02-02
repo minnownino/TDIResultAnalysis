@@ -3,16 +3,25 @@
 Extract Tumor-SGA-DEG-PostProb triplet.
 Fit the parameters according to the powerlaw/normal distribution. Compare the parameters between the real data and random permutated data.
 
+Code to write:
+a. Extract all Tumor-SGA-DEG-PostProb triplets. (Recommend parallel processing)
+b. Plot the distribution of postprob from real data and that from random permutated data (average value) in the same figure.
+
 2. Compare highest posterior probability per DEG distribution for a given SGA between real data experiment, 3 random DEG matrix permutation experiments and 3 single SGA permutation experiments.
 
 e.g., TP53, PIK3CA, PTEN, TTN, ZFHX4, CSMD3
 
+NOTE: 1,2 use original triplets. 3-5 use pp threshold filtered triplet.
 
 3. Use 5, 10, 15 DEGs to called driver. Compare the number of drivers per tumor called between real data and random permutated data.
 
 Result: average number drivers called across all tumors (3x4 table)
 row - number of DEGs used as the threshold, i.e. 5, 10, 15
 column - col1: real data; col2-4: random permutation experiment 1-3.
+
+Code to write:
+a. Determine drivers for each tumor
+b. Calculate driver call rate by comparing driver frequency and sga frequency.
 
 4. Use 5, 10, 15 DEGs to called driver for a given SGA. Compare the number of tumors the given SGA is called as a driver in real data, 3 random DEG permutated data and single SGA permutated data.
 
