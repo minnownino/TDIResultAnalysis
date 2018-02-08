@@ -29,6 +29,23 @@ e.g., TP53, PIK3CA, PTEN, TTN, ZFHX4, CSMD3
 
 5. Calculate average driver call rate for well known drivers collected from Kandoth and Lawrence papers. What percentage of well known drivers are called as TDI drivers in at least one tumor? (Use 5, 10, 15 DEGs to called driver.)
 
+1-5: Check whether the TDI results statitically make sense.
+
+Note: 1) Call significant drivers (# tumors >= 30 and driver call rate >= 0.25); 2) Call significant target DEGs for each significant driver (# tumors >= 50 or target DEG call rate >= 0.2)
+
+6. Check the gene overlaps between TDI predicted significant target DEGs of PIK3CA and PIK3CA knockout affected genes from butterfly paper, i.e. "0h"  "6h"  "12h" "24h" time points.
+
+Result 
+1) show number of gene signatures from butterfly paper at different time points;
+2) show number of TDI predicted significant target DEGs for PIK3CA (Use 5, 10, 15 DEGs to called driver.) 
+3) Perform hypergeometric test to calculate p value showing the significance of gene set overlaps, i.e. 3x4 table (each row is a DEG cutoff criterion and each column is a time point from butterfly paper). Use N=20000.
+
+7. Identify target DEGs associated with PIK3CA 1047 hotspot and target DEGs associated with PIK3CA 542/545 hotspot. Count the number of genes in either gene set and the overlaps between these two gene sets. (Use 5, 10, 15 DEGs to called driver.) 
+
+How to call target DEGs associated with PIK3CA 1047 hotspot:
+1) Find out the tumor set that PIK3CA is a driver and has mutation at AA_loc=1047.
+2) Extract a sub TSD triplet that only contains PIK3CA as the "cause_gene_name" and the tumor set from 1) as the "patient_name"
+3) Identify target DEGs for PIK3CA 1047 hotspot from the sub TSD triplet of 2).
 
 
 
