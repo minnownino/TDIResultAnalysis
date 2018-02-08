@@ -32,7 +32,7 @@ def getTopGtpostprob_parallel(PATH_TDI, FILE):
     return TSDPs
 
 def outputTriplets(triplets,PATHNAME_triplet):
-    df_triplets = pd.DataFrame(data=triplets, columns=['Tumor', 'SGA', 'DEG', 'postprob'])
+    df_triplets = pd.DataFrame(data=triplets, columns=['patient_name', 'cause_gene_name', 'result_gene_name', 'posterior'])
     df_triplets.to_csv(PATHNAME_triplet,index=False)
 
 ######################################################################################################
