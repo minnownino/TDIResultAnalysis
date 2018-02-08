@@ -29,8 +29,6 @@ def getTopGtpostprob_parallel(PATH_TDI, FILE):
         postprob = df[col].loc[topIdx]
         TSDP = [tumor, SGA, DEG, postprob]
         TSDPs.append(TSDP)
-    # df_triplet = pd.DataFrame(SDPs,columns=['SGA','DEG','postprob'])
-    #df_triplet.insert(0,"Tumor",tumor)
     return TSDPs
 
 def outputTriplets(triplets,PATHNAME_triplet):
@@ -41,10 +39,9 @@ def outputTriplets(triplets,PATHNAME_triplet):
 # Main program
 #
 
-#triplets = extractTriplets(PATH_TDI,PATHNAME_triplet,fstart,fend)
 if __name__ == "__main__":
-    PATH_TDI = "C:/Users/XIM33/Documents/NetBeansProjects/TDIC_01_CPU_Tumors_SGAprior/output/"
-    PATHNAME_triplet = "C:/Users/XIM33/Documents/NetBeansProjects/TDIC_01_CPU_Tumors_SGAprior/triplets.csv"
+    PATH_TDI = "../TDIC_01_CPU_-fGtCM_SGAprior/GBMLGG/"
+    PATHNAME_triplet = "../TDI_resultsAnalysis/GBMLGG/triplets.csv"
 
     my_timer = Timer()
 
@@ -60,7 +57,8 @@ if __name__ == "__main__":
     for result in results:
         triplet = result.get()
         triplets += triplet
-    outputTriplets(triplets,PATHNAME_triplet)
 
+    outputTriplets(triplets,PATHNAME_triplet)
+    
     time_hhmmss = my_timer.get_time_hhmmss()
-    print("Time elapsed: %s\n" % time_hhmmss)
+    print("Total time elapsed: %s\n" % time_hhmmss)
